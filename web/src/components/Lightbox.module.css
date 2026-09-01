@@ -1,0 +1,162 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  padding: clamp(3.5rem, 8vh, 5rem) clamp(0.75rem, 3vw, 2.5rem);
+  background: rgba(3, 11, 24, 0.96);
+  backdrop-filter: blur(10px);
+  animation: fade-in 320ms var(--ease) both;
+}
+
+.figure {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  min-width: 0;
+  max-height: 100%;
+}
+
+.imageWrap {
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+}
+
+.image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  /* Leave room for the caption while never exceeding the viewport. */
+  max-height: min(76vh, 900px);
+  object-fit: contain;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xl);
+  animation: rise 420ms var(--ease) both;
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.captionCategory {
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-metal);
+}
+
+.captionText {
+  flex: 1 1 20ch;
+  min-width: 0;
+}
+
+.counter {
+  margin-left: auto;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+}
+
+.close,
+.navButton {
+  display: grid;
+  place-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(245, 247, 250, 0.2);
+  border-radius: 50%;
+  background: rgba(7, 26, 58, 0.6);
+  color: var(--white);
+  cursor: pointer;
+  transition:
+    background-color 300ms var(--ease),
+    border-color 300ms var(--ease),
+    transform 300ms var(--ease);
+}
+
+.close:hover,
+.navButton:hover {
+  background: var(--blue);
+  border-color: var(--blue-metal);
+}
+
+.navButton:hover {
+  transform: scale(1.06);
+}
+
+.close {
+  position: absolute;
+  top: clamp(0.75rem, 3vh, 1.75rem);
+  right: clamp(0.75rem, 3vw, 2.5rem);
+  z-index: 1;
+}
+
+.prev {
+  grid-column: 1;
+}
+
+.next {
+  grid-column: 3;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+  }
+
+  .figure {
+    grid-column: 1;
+  }
+
+  /* Move the arrows below the image so they never overlap it on small screens. */
+  .prev,
+  .next {
+    position: absolute;
+    bottom: clamp(0.75rem, 3vh, 1.5rem);
+    grid-column: 1;
+  }
+
+  .prev {
+    left: 25%;
+  }
+
+  .next {
+    right: 25%;
+  }
+
+  .image {
+    max-height: 62vh;
+  }
+}

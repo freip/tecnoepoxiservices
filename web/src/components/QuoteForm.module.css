@@ -1,0 +1,365 @@
+.section {
+  background:
+    radial-gradient(90% 70% at 15% 0%, rgba(35, 74, 134, 0.28), transparent 62%),
+    var(--navy);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(2.5rem, 1.4rem + 4.5vw, 6rem);
+  align-items: start;
+}
+
+/* Grid items default to min-width:auto, so a long unbreakable string (the email
+   address) would widen the column past the viewport. */
+.grid > * {
+  min-width: 0;
+}
+
+/* ---- Aside ---- */
+
+/* Narrower than the shared `.section-head` measure — this is a column, not a
+   full-width lead-in. The head gap between eyebrow/title/lede is inherited. */
+.aside {
+  max-width: 46ch;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.contact {
+  display: grid;
+  gap: 1.5rem;
+  /* Sits on top of the section-head flex gap, so it stays modest. */
+  margin: clamp(1.25rem, 0.8rem + 1.8vw, 2.25rem) 0 0;
+  padding-top: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+  border-top: 1px solid var(--rule);
+}
+
+.contact dt {
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.4rem;
+}
+
+.contact dd {
+  margin: 0;
+  color: var(--silver);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.contact a {
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease);
+}
+
+.contact a:hover {
+  color: var(--white);
+  border-bottom-color: var(--blue-metal);
+}
+
+/* ---- Form ---- */
+
+.formWrap {
+  padding: clamp(1.5rem, 0.9rem + 2.6vw, 3.25rem);
+  background: linear-gradient(160deg, rgba(3, 11, 24, 0.72), rgba(3, 11, 24, 0.5));
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.row {
+  display: grid;
+  gap: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.label,
+.legend {
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0;
+  transition: color var(--dur-mid) var(--ease);
+}
+
+.field:focus-within .label {
+  color: var(--blue-metal);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.9rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(184, 190, 200, 0.28);
+  border-radius: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: var(--step-0);
+  transition: border-color 320ms var(--ease);
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-bottom-color: rgba(184, 190, 200, 0.5);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(var(--white-rgb), 0.3);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-bottom-color: var(--blue-metal);
+}
+
+/* Field-level focus is shown by the underline; keep the global ring off inputs. */
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible {
+  outline: none;
+}
+
+.inputError {
+  border-bottom-color: #d98a8a;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+  line-height: 1.7;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.select {
+  appearance: none;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.select option {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: var(--silver);
+  pointer-events: none;
+}
+
+/* ---- Project type chips ---- */
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.choice {
+  padding: 0.7rem 1.25rem;
+  border: 1px solid rgba(184, 190, 200, 0.24);
+  border-radius: var(--r-pill);
+  background: rgba(var(--white-rgb), 0.03);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  cursor: pointer;
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease),
+    background-color var(--dur-mid) var(--ease);
+}
+
+.choice:hover {
+  color: var(--white);
+  border-color: var(--blue-metal);
+  background: rgba(var(--white-rgb), 0.07);
+}
+
+/* Keyboard focus lands on the hidden radio — surface it on the visible chip. */
+.choice:has(input:focus-visible) {
+  outline: 2px solid var(--blue-metal);
+  outline-offset: 3px;
+}
+
+.choiceActive,
+.choiceActive:hover {
+  color: var(--white);
+  border-color: var(--blue-metal);
+  background: rgba(35, 74, 134, 0.5);
+}
+
+/* ---- Upload ---- */
+
+.upload {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px dashed rgba(184, 190, 200, 0.3);
+  border-radius: var(--r-md);
+  color: var(--silver);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-mid) var(--ease),
+    color var(--dur-mid) var(--ease),
+    background-color var(--dur-mid) var(--ease);
+}
+
+.upload:hover {
+  border-color: var(--blue-metal);
+  background: rgba(35, 74, 134, 0.14);
+  color: var(--white);
+}
+
+.uploadIcon {
+  display: inline-flex;
+  color: var(--blue-metal);
+}
+
+.hint {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-faint);
+}
+
+/* ---- Messages + submit ---- */
+
+.error {
+  font-size: var(--step--1);
+  color: #e5a3a3;
+}
+
+.formError {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(229, 163, 163, 0.4);
+  border-radius: var(--r-sm);
+  background: rgba(229, 163, 163, 0.08);
+  font-size: var(--step--1);
+  color: #e5a3a3;
+}
+
+.submitRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+  margin-top: 0.25rem;
+  padding-top: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+  border-top: 1px solid var(--rule);
+}
+
+.privacy {
+  flex: 1 1 20ch;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-faint);
+}
+
+/* ---- Success ---- */
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  max-width: 46ch;
+  margin-inline: auto;
+  padding-block: clamp(2rem, 1.2rem + 3.5vw, 4rem);
+  text-align: center;
+}
+
+.successMark {
+  display: grid;
+  place-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(var(--blue-metal-rgb), 0.6);
+  border-radius: 50%;
+  background: rgba(35, 74, 134, 0.22);
+  box-shadow: 0 0 0 10px rgba(35, 74, 134, 0.1);
+  color: var(--blue-metal);
+}
+
+.successTitle {
+  font-size: var(--step-3);
+}
+
+.successBody {
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+  line-height: 1.6;
+}
+
+.successPhone {
+  margin-top: 1.25rem;
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--blue-metal);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-mid) var(--ease);
+}
+
+.successPhone:hover {
+  border-bottom-color: var(--blue-metal);
+}
+
+@media (min-width: 620px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+}

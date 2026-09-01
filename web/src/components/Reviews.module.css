@@ -1,0 +1,165 @@
+/* Still restrained — the padding stays under --section-y so this reads as a
+   band of social proof rather than a section competing for attention — but tall
+   enough now to carry a heading above the cards. */
+.section {
+  padding-block: clamp(3.5rem, 2.6rem + 3.6vw, 5.5rem);
+  background: var(--navy-deep);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 52ch;
+  margin: 0 auto clamp(2rem, 1.5rem + 1.6vw, 3rem);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.googleMark {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.rating {
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.label {
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.intro {
+  color: var(--ink-muted);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.1rem;
+  flex: none;
+}
+
+.stars svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: #f5b544;
+}
+
+.score .stars svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* Fades the cards out at both edges so they enter and leave instead of being
+   clipped by a hard line. */
+.viewport {
+  position: relative;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: marquee 70s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  /* Half the track is the duplicated set, so this lands on an identical frame. */
+  to {
+    transform: translate3d(calc(-50% - 0.5rem), 0, 0);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: none;
+  width: clamp(16.5rem, 70vw, 21rem);
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-md);
+  background: rgba(var(--white-rgb), 0.03);
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.avatar {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: var(--r-pill);
+  object-fit: cover;
+  flex: none;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--step--1);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cards are a fixed height so the row never bounces; the longest review is
+   truncated rather than given its own oversized card. */
+.body {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

@@ -1,0 +1,99 @@
+.section {
+  background: var(--navy-deep);
+}
+
+.head {
+  max-width: 40ch;
+}
+
+.title {
+  font-size: var(--step-4);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: var(--block-gap) 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-block: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+  transition: opacity 400ms var(--ease);
+}
+
+.value {
+  font-family: var(--font-display), sans-serif;
+  /* One step down from a section title: these are supporting figures, not
+     headlines, and four of them at display size fought the page. */
+  font-size: var(--step-3);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--white);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.pillarTitle {
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-metal);
+}
+
+.pillarBody {
+  max-width: 34ch;
+  font-size: var(--step-0);
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pillar {
+    padding-inline: clamp(1.5rem, 3vw, 2.75rem);
+    border-left: 1px solid var(--rule);
+  }
+
+  .pillar:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pillar {
+    border-bottom: 0;
+    /* Vertical rules replace the stacked hairlines and give the row structure. */
+    border-left: 1px solid var(--rule);
+  }
+
+  .pillar:nth-child(odd) {
+    padding-left: clamp(1.5rem, 3vw, 2.75rem);
+    border-left: 1px solid var(--rule);
+  }
+
+  .pillar:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}

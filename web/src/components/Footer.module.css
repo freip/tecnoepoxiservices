@@ -1,0 +1,100 @@
+.footer {
+  background: var(--navy-deep);
+  border-top: 1px solid var(--rule);
+}
+
+.inner {
+  display: grid;
+  gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  padding-block: clamp(3.25rem, 2.2rem + 4.5vw, 6rem);
+}
+
+/* Keep the email address from widening its column past the viewport. */
+.inner > * {
+  min-width: 0;
+}
+
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+}
+
+.mark {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--r-sm);
+}
+
+.tagline {
+  max-width: 30ch;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+.heading {
+  margin-bottom: 1.35rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.links,
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.link {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--silver);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease);
+}
+
+.link:hover {
+  color: var(--white);
+  border-bottom-color: var(--blue-metal);
+}
+
+.address {
+  margin-top: 0.65rem;
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--ink-faint);
+}
+
+.base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.85rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+
+.baseLink {
+  transition: color var(--dur-mid) var(--ease);
+}
+
+.baseLink:hover {
+  color: var(--white);
+}
+
+@media (min-width: 760px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}

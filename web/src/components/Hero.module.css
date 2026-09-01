@@ -1,0 +1,239 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* svh keeps mobile browser chrome from cropping the composition. */
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center 62%;
+}
+
+/*
+ * Three-part scrim: a vertical wash that anchors the type at the bottom, a
+ * navy tint that pulls the photograph into the brand palette, and a soft
+ * left-hand pool so the headline always has a dark bed under it.
+ */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(3, 11, 24, 0.75) 0%,
+      rgba(3, 11, 24, 0.26) 30%,
+      rgba(3, 11, 24, 0.66) 70%,
+      rgba(3, 11, 24, 0.96) 100%
+    ),
+    radial-gradient(80% 70% at 12% 78%, rgba(3, 11, 24, 0.6), transparent 70%),
+    linear-gradient(to right, rgba(7, 26, 58, 0.55), rgba(7, 26, 58, 0.04));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 8vh, 6rem));
+  padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  margin-top: auto;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  color: var(--blue-metal);
+  animation: fade-up 900ms var(--ease) both 120ms;
+}
+
+.headline {
+  /* Wide enough that "Experience you can trust." holds on one line — each line
+     masks its own reveal, so a wrapped line would break the animation. */
+  max-width: 22ch;
+  margin-top: clamp(1.5rem, 3vh, 2.25rem);
+  font-size: var(--step-5);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-shadow: 0 2px 40px rgba(3, 11, 24, 0.5);
+}
+
+/* Each line masks its own upward reveal. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.lineInner {
+  display: block;
+  animation: line-up 1100ms var(--ease) both;
+}
+
+.subhead {
+  max-width: 50ch;
+  margin-top: clamp(1.5rem, 2.8vh, 2rem);
+  font-size: var(--step-1);
+  line-height: 1.62;
+  color: rgba(var(--white-rgb), 0.8);
+  text-wrap: pretty;
+  animation: fade-up 900ms var(--ease) both 620ms;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: clamp(2.25rem, 4.5vh, 3.25rem);
+  animation: fade-up 900ms var(--ease) both 760ms;
+}
+
+/* ---- Authority strip ---- */
+
+.credentials {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(var(--white-rgb), 0.14);
+  background: linear-gradient(to bottom, rgba(3, 11, 24, 0.35), rgba(3, 11, 24, 0.7));
+  backdrop-filter: blur(6px);
+  animation: fade-up 900ms var(--ease) both 900ms;
+}
+
+.credentialList {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+}
+
+.credential {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid rgba(var(--white-rgb), 0.09);
+}
+
+.credential:last-child {
+  border-bottom: 0;
+}
+
+.credentialValue {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-2);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.credentialValueLong {
+  font-size: var(--step-0);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
+  color: var(--silver);
+}
+
+.credentialLabel {
+  margin: 0;
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--white-rgb), 0.45);
+}
+
+@media (max-width: 30rem) {
+  /* Full-bleed stacked buttons read as deliberate at this width, where two
+     side-by-side pills would each be too narrow to look considered. */
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 1.75rem;
+  }
+
+  /* Tighten the whole stack so the hero leaves the fold breathing room instead
+     of running edge to edge on a phone. */
+  .content {
+    padding-top: calc(var(--header-h) + 2rem);
+  }
+
+  .headline {
+    max-width: none;
+    margin-top: 1rem;
+  }
+
+  .subhead {
+    margin-top: 1rem;
+    font-size: var(--step-0);
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 760px) {
+  .credentialList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .credential {
+    padding-block: clamp(1.4rem, 1rem + 1.2vw, 2rem);
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+    border-bottom: 0;
+    border-left: 1px solid rgba(var(--white-rgb), 0.1);
+    justify-content: center;
+  }
+
+  .credential:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  /* Keep the last cell from running into the container edge. */
+  .credential:last-child {
+    padding-right: 0;
+  }
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lineInner,
+  .eyebrow,
+  .subhead,
+  .ctas,
+  .credentials {
+    animation: none;
+  }
+}

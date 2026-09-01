@@ -1,0 +1,155 @@
+.section {
+  background: var(--navy);
+}
+
+.head {
+  max-width: 44ch;
+}
+
+.title {
+  font-size: var(--step-4);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 2.2rem + 6vw, 8rem);
+  margin-top: var(--block-gap);
+}
+
+.row {
+  display: grid;
+  gap: clamp(1.75rem, 1rem + 3.4vw, 4rem);
+  align-items: center;
+}
+
+/*
+ * A fixed frame ratio is what makes the sequence read as one series: the source
+ * photographs range from 1:1 to 16:9, so without it every row would be a
+ * different height and the rhythm would fall apart.
+ */
+.media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--navy-deep);
+  box-shadow: var(--shadow-lg);
+}
+
+/* A hairline inside the frame keeps the photo from bleeding into the navy. */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(var(--white-rgb), 0.08);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Slow settle on hover — the photograph relaxes rather than jumps. */
+  transform: scale(1.05);
+  transition: transform 1200ms var(--ease);
+}
+
+.row:hover .image {
+  transform: scale(1);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.index {
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--blue-metal);
+}
+
+.name {
+  font-size: var(--step-3);
+  text-transform: uppercase;
+  /* Uppercase needs air, not the negative tracking the display face uses. */
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+}
+
+.line {
+  max-width: 26ch;
+  margin-top: 0.15rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.text {
+  max-width: 44ch;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+  padding: 0.6rem 1.1rem;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--silver);
+  border: 1px solid rgba(184, 190, 200, 0.24);
+  border-radius: var(--r-pill);
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease),
+    background-color var(--dur-mid) var(--ease);
+}
+
+.linkArrow {
+  display: inline-flex;
+  transition: transform var(--dur-mid) var(--ease);
+}
+
+.link:hover {
+  color: var(--white);
+  border-color: rgba(var(--blue-metal-rgb), 0.7);
+  background: rgba(35, 74, 134, 0.24);
+}
+
+.link:hover .linkArrow {
+  transform: translateX(3px);
+}
+
+@media (min-width: 1000px) {
+  .row {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  /* Flip every second row so the layout alternates down the page. */
+  .row:nth-child(even) .media {
+    order: 2;
+  }
+
+  .row:nth-child(even) .body {
+    order: 1;
+    padding-right: clamp(1rem, 0.4rem + 2vw, 3rem);
+  }
+
+  .row:nth-child(odd) .body {
+    padding-left: clamp(1rem, 0.4rem + 2vw, 3rem);
+  }
+}

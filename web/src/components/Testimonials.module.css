@@ -1,0 +1,104 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--navy);
+}
+
+.media {
+  position: relative;
+  min-height: clamp(18rem, 45vh, 30rem);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.04);
+  transition: transform 1600ms var(--ease);
+}
+
+.section:hover .image {
+  transform: scale(1);
+}
+
+/* Softens the seam between the photograph and the navy panel beside it. */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(7, 26, 58, 0.15), rgba(7, 26, 58, 0.55));
+  pointer-events: none;
+}
+
+.panel {
+  display: flex;
+  align-items: center;
+  padding: clamp(3.25rem, 2rem + 6vw, 7rem) var(--gutter);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--head-gap);
+  max-width: 46ch;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.statement {
+  margin-top: 0.35rem;
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: clamp(2rem, 1.4rem + 2vw, 3rem);
+  padding-top: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+  border-top: 1px solid var(--rule);
+  font-style: normal;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  color: var(--ink-faint);
+}
+
+.contactLink {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  font-size: var(--step-0);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue-metal);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease);
+}
+
+.contactLink:hover {
+  color: var(--white);
+  border-bottom-color: var(--blue-metal);
+}
+
+@media (min-width: 1000px) {
+  .section {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .media {
+    min-height: min(80vh, 44rem);
+  }
+
+  /* The panel keeps the text on the same measure as the rest of the page
+     instead of drifting to the far edge on a 1920 screen. */
+  .panel {
+    padding-inline: clamp(2.5rem, 1rem + 4.5vw, 6rem);
+  }
+}

@@ -1,0 +1,181 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 80% 10%, rgba(35, 74, 134, 0.35), transparent 60%),
+    var(--navy);
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  right: -12%;
+  width: min(760px, 78vw);
+  transform: translateY(-50%);
+  /* `screen` removes the artwork's black field, leaving only the glow. */
+  mix-blend-mode: screen;
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.watermark img {
+  width: 100%;
+  height: auto;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.head {
+  max-width: 52ch;
+}
+
+.title {
+  font-size: var(--step-4);
+}
+
+.list {
+  display: grid;
+  gap: 0;
+  margin: var(--block-gap) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem 1.25rem;
+  align-items: center;
+  padding-block: clamp(1.6rem, 1.1rem + 2vw, 2.6rem);
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 400ms var(--ease);
+}
+
+/* ---- Sample swatch ---- */
+
+.swatch {
+  position: relative;
+  grid-row: span 2;
+  align-self: start;
+  display: block;
+  width: clamp(56px, 4rem + 3vw, 88px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--navy-deep);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Hairline over the image so the chip reads as an inset sample, not a card. */
+.swatch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(var(--white-rgb), 0.14);
+  border-radius: inherit;
+  transition: border-color 400ms var(--ease);
+}
+
+.item:hover .swatch::after {
+  border-color: rgba(var(--blue-metal-rgb), 0.6);
+}
+
+.swatchImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 900ms var(--ease);
+}
+
+.item:hover .swatchImage {
+  transform: scale(1.16);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+/* A wash that grows out of the left edge on hover — the row lights up rather
+   than just changing colour. */
+.item::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 calc(var(--gutter) * -1);
+  right: calc(var(--gutter) * -1);
+  background: linear-gradient(to right, rgba(35, 74, 134, 0.22), transparent 70%);
+  opacity: 0;
+  transition: opacity 400ms var(--ease);
+  pointer-events: none;
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item:hover {
+  border-bottom-color: rgba(var(--blue-metal-rgb), 0.5);
+}
+
+.index {
+  position: relative;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: var(--blue-metal);
+}
+
+.name {
+  position: relative;
+  font-size: var(--step-3);
+  letter-spacing: -0.03em;
+  transition:
+    color 400ms var(--ease),
+    transform 500ms var(--ease);
+}
+
+.item:hover .name {
+  color: var(--blue-metal);
+  transform: translateX(4px);
+}
+
+.description {
+  position: relative;
+  grid-column: 2;
+  align-self: start;
+  max-width: 50ch;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 900px) {
+  .item {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(1.5rem, 0.6rem + 3vw, 3.5rem);
+  }
+
+  .swatch {
+    grid-row: auto;
+    align-self: center;
+  }
+
+  .description {
+    grid-column: 3;
+  }
+}
+
+/* The blend mode can render unpredictably in forced-colors mode — drop it there. */
+@media (forced-colors: active) {
+  .watermark {
+    display: none;
+  }
+}

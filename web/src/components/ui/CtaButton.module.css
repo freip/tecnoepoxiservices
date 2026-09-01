@@ -1,0 +1,208 @@
+.cta {
+  /* Every dimension is a local custom property so the size modifiers below
+     only have to restate what actually changes. */
+  --cta-h: 3.125rem;
+  --cta-pad-x: 1.6rem;
+  --cta-gap: 0.8rem;
+  --cta-radius: var(--r-sm);
+  --cta-fs: var(--step--1);
+  --cta-track: 0.14em;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cta-gap);
+  min-height: var(--cta-h);
+  padding-inline: var(--cta-pad-x);
+  border: 1px solid transparent;
+  border-radius: var(--cta-radius);
+  background: none;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--cta-fs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--cta-track);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-mid) var(--ease),
+    background-color var(--dur-mid) var(--ease),
+    box-shadow var(--dur-mid) var(--ease),
+    transform var(--dur-mid) var(--ease);
+}
+
+.cta:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Wipe fill that sweeps in from the left on hover, behind the label. */
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms var(--ease);
+}
+
+.cta:hover:not(:disabled)::before,
+.cta:focus-visible:not(:disabled)::before {
+  transform: scaleX(1);
+}
+
+/* A press should feel physical: the button settles, it does not just recolour. */
+.cta:active:not(:disabled) {
+  transform: translateY(1px) scale(0.995);
+  transition-duration: var(--dur-fast);
+}
+
+.label {
+  position: relative;
+  /* Optical centring — uppercase tracking adds a trailing gap on the right. */
+  margin-right: calc(var(--cta-track) * -1);
+}
+
+/* ---- Arrow: two glyphs on a clipped track ---- */
+
+.arrow {
+  position: relative;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+}
+
+.arrowLead,
+.arrowTrail {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  transition: transform 480ms var(--ease);
+}
+
+.arrowTrail {
+  transform: translateX(-165%);
+}
+
+.cta:hover:not(:disabled) .arrowLead,
+.cta:focus-visible:not(:disabled) .arrowLead {
+  transform: translateX(165%);
+}
+
+.cta:hover:not(:disabled) .arrowTrail,
+.cta:focus-visible:not(:disabled) .arrowTrail {
+  transform: translateX(0);
+}
+
+/* ---- Sizes ---- */
+
+.lg {
+  --cta-h: 3.75rem;
+  --cta-pad-x: clamp(1.5rem, 0.9rem + 2.4vw, 2.5rem);
+  --cta-gap: 1rem;
+  --cta-radius: var(--r-md);
+  --cta-fs: var(--step-0);
+}
+
+/* ---- Variants ----
+   Hierarchy is deliberate: `solid` carries weight and light, `ghost` stays a
+   quiet outline that never competes with the primary action beside it. */
+
+.solid {
+  background: linear-gradient(135deg, #2a5697 0%, var(--blue) 55%, #1a396b 100%);
+  border-color: rgba(var(--blue-metal-rgb), 0.35);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.solid::before {
+  background: linear-gradient(135deg, #3767b0 0%, var(--blue-metal) 100%);
+}
+
+.solid:hover:not(:disabled),
+.solid:focus-visible:not(:disabled) {
+  border-color: rgba(var(--blue-metal-rgb), 0.7);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+.ghost {
+  border-color: rgba(var(--white-rgb), 0.26);
+  background: rgba(var(--white-rgb), 0.035);
+  color: var(--white);
+  backdrop-filter: blur(8px);
+}
+
+/* No wipe on the secondary — the fill is what marks the primary. */
+.ghost::before {
+  display: none;
+}
+
+.ghost:hover:not(:disabled),
+.ghost:focus-visible:not(:disabled) {
+  border-color: rgba(var(--white-rgb), 0.55);
+  background: rgba(var(--white-rgb), 0.1);
+  transform: translateY(-2px);
+}
+
+/* For the one light section, where navy-on-white is the strong pairing. */
+.light {
+  background: var(--navy);
+  border-color: rgba(var(--navy-deep-rgb), 0.2);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.light::before {
+  background: var(--blue);
+}
+
+.light:hover:not(:disabled),
+.light:focus-visible:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Tight viewports: pull the tracking and padding in so long labels such as
+   "Get Your Free Quote" still fit on a 320px screen without wrapping. */
+@media (max-width: 30rem) {
+  .cta {
+    --cta-pad-x: 1.15rem;
+    --cta-gap: 0.65rem;
+    --cta-track: 0.08em;
+  }
+
+  .lg {
+    --cta-h: 3.35rem;
+    --cta-fs: var(--step--1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta::before {
+    display: none;
+  }
+
+  .cta:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .solid:hover:not(:disabled) {
+    background: var(--blue-metal);
+  }
+
+  .ghost:hover:not(:disabled) {
+    background: rgba(var(--white-rgb), 0.14);
+  }
+}

@@ -1,0 +1,261 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 480ms var(--ease),
+    border-color 480ms var(--ease),
+    box-shadow 480ms var(--ease),
+    backdrop-filter 480ms var(--ease);
+}
+
+.condensed {
+  background: rgba(3, 11, 24, 0.78);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom-color: var(--rule);
+  box-shadow: 0 12px 40px -24px rgba(3, 11, 24, 0.9);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  width: 100%;
+  min-height: var(--header-h);
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- Brand lockup ---- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: auto;
+  transition: opacity var(--dur-mid) var(--ease);
+}
+
+.brand:hover {
+  opacity: 0.82;
+}
+
+.emblem {
+  width: clamp(2.1rem, 1.7rem + 1vw, 2.7rem);
+  height: auto;
+  flex: none;
+}
+
+.wordmark {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.22rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wordmarkLight {
+  font-weight: 400;
+  color: var(--silver);
+  margin-left: 0.3em;
+}
+
+/* ---- Desktop nav ---- */
+
+.nav {
+  display: none;
+  gap: clamp(1.25rem, 0.6rem + 1.8vw, 2.5rem);
+}
+
+.navLink {
+  position: relative;
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding-block: 0.5rem;
+  transition: color var(--dur-mid) var(--ease);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--blue-metal);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 420ms var(--ease);
+}
+
+.navLink:hover {
+  color: var(--white);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.actions {
+  display: none;
+  align-items: center;
+  gap: clamp(1rem, 0.4rem + 1.6vw, 1.75rem);
+}
+
+.phone {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--ink-muted);
+  transition: color var(--dur-mid) var(--ease);
+}
+
+.phone:hover {
+  color: var(--white);
+}
+
+/* ---- Burger ---- */
+
+.burger {
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  width: 46px;
+  height: 46px;
+  margin-right: -0.6rem;
+  padding: 0;
+  border: 1px solid rgba(var(--white-rgb), 0.14);
+  border-radius: var(--r-sm);
+  background: rgba(var(--white-rgb), 0.04);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-mid) var(--ease),
+    background-color var(--dur-mid) var(--ease);
+}
+
+.burger:hover {
+  border-color: rgba(var(--white-rgb), 0.3);
+  background: rgba(var(--white-rgb), 0.09);
+}
+
+.burgerBar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--white);
+  transition: transform 380ms var(--ease);
+}
+
+.barTop {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.barBottom {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* ---- Mobile overlay ---- */
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  /* Sits behind the header bar itself but above the page beneath it. */
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2.5rem, 6vh, 4rem);
+  padding:
+    calc(var(--header-h) + 2rem)
+    var(--gutter)
+    calc(2.5rem + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(120% 60% at 85% 0%, rgba(35, 74, 134, 0.4), transparent 65%),
+    var(--navy-deep);
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transition:
+    opacity 420ms var(--ease),
+    visibility 0s linear 420ms;
+}
+
+.menuOpen {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 420ms var(--ease),
+    visibility 0s;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLink {
+  padding-block: 0.45rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-3);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 520ms var(--ease),
+    transform 520ms var(--ease),
+    color 300ms var(--ease);
+}
+
+.mobileLink:active {
+  color: var(--blue-metal);
+}
+
+.menuOpen .mobileLink {
+  opacity: 1;
+  transform: none;
+}
+
+.mobileFoot {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  padding-top: clamp(1.75rem, 4vh, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.mobileCta {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mobilePhone {
+  align-self: flex-start;
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--silver);
+}
+
+@media (min-width: 900px) {
+  .nav,
+  .actions {
+    display: flex;
+  }
+
+  .burger,
+  .mobileMenu {
+    display: none;
+  }
+}

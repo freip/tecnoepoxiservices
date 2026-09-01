@@ -1,0 +1,276 @@
+/* ==========================================================================
+   Tecno Epoxy — design tokens + global base
+   Palette is taken verbatim from the supplied brand colour reference.
+   ========================================================================== */
+
+:root {
+  /* Brand palette */
+  --navy-deep: #030b18;
+  --navy: #071a3a;
+  --blue: #234a86;
+  --blue-metal: #5d82bd;
+  --white: #f5f7fa;
+  --silver: #b8bec8;
+  --graphite: #343a43;
+  --grey-light: #e5e8ed;
+
+  /* Derived brand tints — used for glows, washes and hairlines so the
+     accent colour stays consistent instead of being re-mixed per component. */
+  --blue-metal-rgb: 93, 130, 189;
+  --navy-deep-rgb: 3, 11, 24;
+  --white-rgb: 245, 247, 250;
+
+  /* Semantic surfaces */
+  --surface: var(--navy);
+  --surface-deep: var(--navy-deep);
+  --surface-light: var(--white);
+  --ink: var(--white);
+  --ink-muted: rgba(245, 247, 250, 0.68);
+  --ink-faint: rgba(245, 247, 250, 0.46);
+  --ink-dark: var(--navy-deep);
+  --ink-dark-muted: rgba(3, 11, 24, 0.66);
+  --rule: rgba(184, 190, 200, 0.16);
+  --rule-strong: rgba(184, 190, 200, 0.3);
+  --rule-dark: rgba(3, 11, 24, 0.12);
+
+  /* Type scale — fluid, clamped so nothing breaks at the extremes.
+     Upper bounds are deliberately restrained: at 1920 the page should read
+     as composed, not shouted. */
+  --step--2: clamp(0.7rem, 0.68rem + 0.1vw, 0.78rem);
+  --step--1: clamp(0.8rem, 0.77rem + 0.14vw, 0.9rem);
+  --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.08rem);
+  --step-1: clamp(1.13rem, 1.06rem + 0.34vw, 1.35rem);
+  --step-2: clamp(1.4rem, 1.24rem + 0.78vw, 1.9rem);
+  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.6rem);
+  --step-4: clamp(2.15rem, 1.72rem + 2.15vw, 3.6rem);
+  /* The hero headline alone. Its floor is set so the first line still fits a
+     320px screen — at the old 2.75rem minimum the hero filled the whole phone. */
+  --step-5: clamp(2.1rem, 1.35rem + 3.6vw, 5.6rem);
+
+  /* Rhythm — width-driven, so short/landscape viewports do not collapse. */
+  --gutter: clamp(1.25rem, 0.85rem + 2.2vw, 4rem);
+  --section-y: clamp(4.5rem, 3.1rem + 6.4vw, 9rem);
+  /* Gap between an eyebrow/title/lede block and the content beneath it. */
+  --block-gap: clamp(2.5rem, 1.7rem + 3.4vw, 5rem);
+  /* Internal gaps of a section head. */
+  --head-gap: clamp(0.85rem, 0.65rem + 0.8vw, 1.35rem);
+
+  /* Containers */
+  --max-w: 1320px;
+  --measure: 46ch;
+
+  /* Header — every anchor offset is derived from this, never guessed. */
+  --header-h: clamp(4.25rem, 3.7rem + 1.8vw, 5.5rem);
+
+  /* Radii — a small, consistent scale. Hard 2px corners read as cheap; these
+     are soft enough to feel finished without turning into bubbles. */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 8px rgba(3, 11, 24, 0.28);
+  --shadow-md: 0 12px 32px -12px rgba(3, 11, 24, 0.6);
+  --shadow-lg: 0 32px 70px -32px rgba(3, 11, 24, 0.85);
+  --shadow-xl: 0 48px 110px -48px rgba(3, 11, 24, 0.95);
+  --glow: 0 0 0 1px rgba(93, 130, 189, 0.35), 0 18px 44px -20px rgba(35, 74, 134, 0.85);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-fast: 200ms;
+  --dur-mid: 380ms;
+  --dur: 720ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps anchored sections clear of the fixed header. */
+  scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/*
+ * Headings: `balance` spreads short display lines evenly instead of leaving a
+ * single orphaned word, and the line-heights open up as the type gets smaller
+ * so multi-line titles never read as one solid block.
+ */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+}
+
+h3 {
+  line-height: 1.14;
+  letter-spacing: -0.024em;
+}
+
+h4 {
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Visible, on-brand focus for keyboard users only. */
+:focus-visible {
+  outline: 2px solid var(--blue-metal);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* ---------- Shared primitives ---------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+/*
+ * Section head: eyebrow → title → lede, with one consistent rhythm everywhere.
+ * Components add their own max-width; the spacing is owned here.
+ */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--head-gap);
+  max-width: 62ch;
+}
+
+/* Small uppercase label that opens most sections. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blue-metal);
+  margin: 0;
+}
+
+.eyebrow::before {
+  content: '';
+  width: clamp(1.75rem, 4vw, 3.25rem);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+  flex: none;
+}
+
+.on-light .eyebrow {
+  color: var(--blue);
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.on-light .lede {
+  color: var(--ink-dark-muted);
+}
+
+/* Screen-reader-only, for labels that must exist but not show. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Motion preferences ----------
+   Honour the OS setting: keep the page fully usable, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

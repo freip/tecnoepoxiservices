@@ -1,0 +1,46 @@
+Pela identidade visual da **Tecno Epoxi Flooring**, a paleta é claramente baseada em **azul-marinho premium + azul metálico + branco/prata**, transmitindo tecnologia, resistência e acabamento sofisticado.
+
+### 🎨 Paleta principal
+
+| Cor                | HEX       | Uso                                     |
+| ------------------ | --------- | --------------------------------------- |
+| **Navy Principal** | `#071A3A` | Fundo principal, header, seções premium |
+| **Navy Profundo**  | `#030B18` | Fundo escuro, rodapé, contraste         |
+| **Azul Tecno**     | `#234A86` | Destaques, botões, elementos gráficos   |
+| **Azul Metálico**  | `#5D82BD` | Hover, detalhes, gradientes             |
+| **Branco**         | `#F5F7FA` | Textos principais e logo                |
+| **Cinza Prata**    | `#B8BEC8` | Textos secundários, bordas, detalhes    |
+| **Cinza Grafite**  | `#343A43` | Elementos neutros                       |
+| **Cinza Claro**    | `#E5E8ED` | Fundos claros e cards                   |
+
+### ⭐ Eu usaria assim no site
+
+**60% — `#071A3A`**
+Base da identidade. Dá o aspecto premium.
+
+**20% — `#F5F7FA`**
+Para áreas de respiro, textos e fundos claros.
+
+**10% — `#234A86`**
+Elementos de destaque e identidade.
+
+**5% — `#5D82BD`**
+Acentos, hover e efeitos de luz.
+
+**5% — `#B8BEC8`**
+Detalhes metálicos e textos secundários.
+
+### 🔥 Combinação que combina muito com a empresa
+
+```text
+#030B18  █████  Navy profundo
+#071A3A  █████  Navy principal
+#234A86  █████  Azul Tecno
+#5D82BD  █████  Azul metálico
+#B8BEC8  █████  Prata
+#F5F7FA  █████  Branco
+```
+
+Para o **site que estamos planejando**, eu manteria essa identidade, mas faria uma versão **mais sofisticada e minimalista que o material atual**: muito navy, grandes fotos dos pisos, branco/prata nos textos e azul metálico apenas como ponto de atenção.
+
+O resultado pode ficar com uma estética de **“luxury construction / premium flooring”**, em vez de parecer um site tradicional de empresa de pisos.

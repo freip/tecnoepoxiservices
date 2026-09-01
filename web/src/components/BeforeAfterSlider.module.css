@@ -1,0 +1,192 @@
+.wrapper {
+  margin: 0;
+  width: 100%;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--navy-deep);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  cursor: ew-resize;
+  /* Allow vertical page scroll to pass through; we only claim horizontal drags. */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: var(--shadow-xl);
+  transition: box-shadow 600ms var(--ease);
+}
+
+.frame:hover {
+  box-shadow:
+    var(--shadow-xl),
+    0 0 0 1px rgba(var(--blue-metal-rgb), 0.28);
+}
+
+.image {
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.beforeLayer {
+  position: absolute;
+  inset: 0;
+  /* Eased while sweeping or keying; instant while dragging so it tracks the finger. */
+  transition: clip-path 520ms var(--ease);
+  will-change: clip-path;
+}
+
+.dragging .beforeLayer,
+.dragging .divider,
+.dragging .handle {
+  transition: none;
+}
+
+/* ---- Divider ---- */
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  transition: left 520ms var(--ease);
+  pointer-events: none;
+}
+
+.dividerLine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--white-rgb), 0.35),
+    rgba(var(--white-rgb), 0.95) 25%,
+    rgba(var(--white-rgb), 0.95) 75%,
+    rgba(var(--white-rgb), 0.35)
+  );
+  box-shadow: 0 0 24px rgba(var(--blue-metal-rgb), 0.9);
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-content: center;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  color: var(--navy-deep);
+  background: var(--white);
+  border-radius: 50%;
+  cursor: ew-resize;
+  transition:
+    left 520ms var(--ease),
+    transform 320ms var(--ease),
+    background-color 320ms var(--ease),
+    box-shadow 320ms var(--ease);
+  box-shadow:
+    0 8px 28px rgba(3, 11, 24, 0.6),
+    0 0 0 6px rgba(var(--white-rgb), 0.1);
+}
+
+.frame:hover .handle {
+  transform: scale(1.08);
+  box-shadow:
+    0 10px 34px rgba(3, 11, 24, 0.65),
+    0 0 0 10px rgba(var(--white-rgb), 0.12);
+}
+
+.dragging .handle {
+  transform: scale(0.96);
+}
+
+.handle:focus-visible {
+  background: var(--blue-metal);
+  color: var(--white);
+}
+
+/* ---- Corner tags ---- */
+
+.tag {
+  position: absolute;
+  top: 1rem;
+  z-index: 2;
+  padding: 0.45rem 0.85rem;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(3, 11, 24, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--white-rgb), 0.18);
+  border-radius: var(--r-pill);
+  pointer-events: none;
+  transition: opacity 320ms var(--ease);
+}
+
+.tagBefore {
+  left: 1rem;
+}
+
+.tagAfter {
+  right: 1rem;
+  border-color: rgba(var(--blue-metal-rgb), 0.55);
+  background: rgba(35, 74, 134, 0.55);
+}
+
+/* ---- Caption ---- */
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.captionLabel {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-metal);
+}
+
+.captionText {
+  max-width: 56ch;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink-muted);
+}
+
+@media (min-width: 760px) {
+  .tag {
+    top: 1.5rem;
+  }
+
+  .tagBefore {
+    left: 1.5rem;
+  }
+
+  .tagAfter {
+    right: 1.5rem;
+  }
+
+  .handle {
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+  }
+
+  .caption {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+
+  .captionLabel {
+    flex: none;
+  }
+}

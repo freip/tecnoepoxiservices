@@ -1,0 +1,62 @@
+.section {
+  position: relative;
+  display: grid;
+  /* Centre vertically but let the inner shell stretch: `place-items: center`
+     would size the column to the content and push past narrow viewports. */
+  align-content: center;
+  justify-items: stretch;
+  min-height: clamp(26rem, 22rem + 22vw, 42rem);
+  overflow: hidden;
+  background: var(--navy-deep);
+  text-align: center;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(65% 60% at 50% 50%, rgba(3, 11, 24, 0.58), rgba(3, 11, 24, 0.92)),
+    linear-gradient(to bottom, rgba(7, 26, 58, 0.55), rgba(3, 11, 24, 0.88));
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding-block: clamp(4rem, 2.8rem + 5.5vw, 7rem);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+  margin-inline: auto;
+  max-width: 56ch;
+}
+
+.title {
+  /* Sized to break onto two lines at desktop — the display size does the work. */
+  max-width: 18ch;
+  margin-inline: auto;
+  font-size: var(--step-4);
+}
+
+.body {
+  max-width: 42ch;
+  font-size: var(--step-1);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  text-wrap: balance;
+}
+
+/* The button needs clear air from the copy — at 1.5rem it read as part of the
+   same paragraph block rather than as the section's one action. */
+.content > :last-child {
+  margin-top: clamp(0.75rem, 0.4rem + 1.2vw, 1.5rem);
+}
