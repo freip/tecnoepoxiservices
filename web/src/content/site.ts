@@ -46,6 +46,15 @@ export const company = {
   website: 'https://www.tecnoepoxiservices.com/',
 } as const;
 
+/**
+ * Single source of truth for "how long we've been doing this".
+ *
+ * Derived rather than written out, so the headline and the stat pillar can
+ * never drift apart — and neither goes stale on its own. Note this is
+ * evaluated when the page is prerendered, so it only advances on a rebuild.
+ */
+export const yearsInBusiness = new Date().getFullYear() - company.foundedYear;
+
 export const brand = {
   emblem: '/assets/brand/derived/emblem.png',
   watermark: '/assets/brand/derived/watermark.png',
@@ -377,10 +386,10 @@ export const finishesSection = {
 
 export const why = {
   eyebrow: `Why ${company.name}`,
-  title: 'Ten years of finished floors.',
+  title: `${yearsInBusiness} years of finished floors.`,
   pillars: [
     {
-      value: `${new Date().getFullYear() - company.foundedYear}+`,
+      value: `${yearsInBusiness}+`,
       title: 'Years of experience',
       body: `Installing epoxy flooring systems since ${company.foundedYear}.`,
     },
