@@ -270,6 +270,17 @@
   color: var(--ink-faint);
 }
 
+.hintLink {
+  color: var(--blue-metal);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(var(--blue-metal-rgb), 0.4);
+  transition: border-color var(--dur-mid) var(--ease);
+}
+
+.hintLink:hover {
+  border-bottom-color: var(--blue-metal);
+}
+
 /* ---- Messages + submit ---- */
 
 .error {
@@ -296,8 +307,10 @@
   border-top: 1px solid var(--rule);
 }
 
+/* Full basis so the note always drops below the two buttons. Sharing the row
+   with them left it squeezed into a three-word column at desktop widths. */
 .privacy {
-  flex: 1 1 20ch;
+  flex: 1 1 100%;
   font-size: var(--step--1);
   line-height: 1.6;
   color: var(--ink-faint);
@@ -336,6 +349,15 @@
 .successBody {
   color: var(--ink-muted);
   font-size: var(--step-1);
+  line-height: 1.6;
+}
+
+/* Sits between the thank-you and the WhatsApp button, so the ask reads as the
+   natural next step rather than an unexplained second button. */
+.successPrompt {
+  margin-top: 0.5rem;
+  color: var(--ink-muted);
+  font-size: var(--step-0);
   line-height: 1.6;
 }
 

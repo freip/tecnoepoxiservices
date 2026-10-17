@@ -1,7 +1,8 @@
 'use client';
 
 import { useId, useRef, useState } from 'react';
-import { company, quoteForm } from '@/content/site';
+import { company, quoteForm, whatsapp } from '@/content/site';
+import { whatsappUrl } from '@/lib/whatsapp';
 import {
   PROJECT_TYPES,
   PROJECT_TYPE_LABELS,
@@ -91,6 +92,13 @@ export function QuoteForm() {
             </span>
             <h2 className={styles.successTitle}>{quoteForm.successTitle}</h2>
             <p className={styles.successBody}>{quoteForm.successBody}</p>
+            {/* The request is in, but photos still are not — and they are what
+                lets us quote without a site visit. This is the best moment to
+                ask: the customer is engaged and has nothing left to do. */}
+            <p className={styles.successPrompt}>{whatsapp.formAside}</p>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+              {whatsapp.label}
+            </CtaButton>
             <a className={styles.successPhone} href={company.phoneHref}>
               {company.phone}
             </a>
@@ -277,10 +285,20 @@ export function QuoteForm() {
                   setPhotoNames(Array.from(e.target.files ?? []).map((f) => f.name))
                 }
               />
-              {/* v1 records how many photos were offered; upload transport lands
-                  with the AI photo-analysis step. */}
+              {/* The form records how many photos were offered but cannot carry
+                  the files themselves, so the hint must not imply it does — it
+                  points at WhatsApp, which can, and the count tells us to ask. */}
               <p className={styles.hint}>
-                Photos help us quote accurately. We&apos;ll ask for them again if needed.
+                Photos help us quote accurately.{' '}
+                <a
+                  className={styles.hintLink}
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Send them on WhatsApp
+                </a>{' '}
+                and we can price your floor without a visit.
               </p>
             </div>
 
@@ -293,6 +311,9 @@ export function QuoteForm() {
             <div className={styles.submitRow}>
               <CtaButton type="submit" size="lg" disabled={status === 'sending'}>
                 {status === 'sending' ? 'Sending…' : quoteForm.submit}
+              </CtaButton>
+              <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+                {whatsapp.label}
               </CtaButton>
               <p className={styles.privacy}>
                 We use your details only to reply to this request.

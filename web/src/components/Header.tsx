@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { brand, company, nav } from '@/content/site';
+import { brand, company, nav, whatsapp } from '@/content/site';
+import { whatsappUrl } from '@/lib/whatsapp';
 import { CtaButton } from './ui/CtaButton';
 import styles from './Header.module.css';
 
@@ -108,6 +109,15 @@ export function Header() {
         <div className={styles.mobileFoot}>
           <CtaButton href="#quote" size="lg" className={styles.mobileCta}>
             Get a Quote
+          </CtaButton>
+          <CtaButton
+            href={whatsappUrl()}
+            variant="whatsapp"
+            size="lg"
+            external
+            className={styles.mobileCta}
+          >
+            {whatsapp.label}
           </CtaButton>
           <a className={styles.mobilePhone} href={company.phoneHref}>
             {company.phone}

@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { finalCta } from '@/content/site';
+import { finalCta, whatsapp } from '@/content/site';
+import { whatsappUrl } from '@/lib/whatsapp';
 import { CtaButton } from './ui/CtaButton';
 import { Reveal } from './ui/Reveal';
 import styles from './FinalCTA.module.css';
@@ -23,9 +24,14 @@ export function FinalCTA() {
         <Reveal className={styles.content}>
           <h2 className={styles.title}>{finalCta.title}</h2>
           <p className={styles.body}>{finalCta.body}</p>
-          <CtaButton href="#quote" size="lg">
-            {finalCta.cta}
-          </CtaButton>
+          <div className={styles.ctas}>
+            <CtaButton href="#quote" size="lg">
+              {finalCta.cta}
+            </CtaButton>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+              {whatsapp.label}
+            </CtaButton>
+          </div>
         </Reveal>
       </div>
     </section>

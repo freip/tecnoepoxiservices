@@ -35,6 +35,16 @@ export const company = {
   phoneHref: 'tel:+15082715230',
   email: 'tecnoepoxiflooring@gmail.com',
   emailHref: 'mailto:tecnoepoxiflooring@gmail.com',
+  /**
+   * WhatsApp is a primary contact channel here, not a fallback: a large share of
+   * the customer base reaches out that way, and it is the only path where a
+   * customer can send photos of the slab — which the quote form cannot do.
+   *
+   * Digits only, country code first, no "+" or punctuation: that is the format
+   * wa.me requires. Defaults to the same line as `phone`; change it here if the
+   * business ever moves WhatsApp to a separate number.
+   */
+  whatsapp: '15082715230',
   address: {
     street: '100 Merrimack Ave',
     city: 'Dracut',
@@ -515,6 +525,22 @@ export const quoteForm = {
   submit: 'Request My Quote',
   successTitle: 'Request received.',
   successBody: 'Thank you — we will be in touch shortly to talk through your project.',
+} as const;
+
+/**
+ * WhatsApp copy, kept here so every entry point says the same thing.
+ *
+ * The label leads with photos on purpose. "Chat on WhatsApp" invites a cold
+ * "how much?" that cannot be answered; asking for photos of the slab gets the
+ * one thing needed to quote, and it is the single job the form cannot do.
+ */
+export const whatsapp = {
+  label: 'Send Photos on WhatsApp',
+  shortLabel: 'WhatsApp',
+  /** Pre-filled first message. Keeps the customer from staring at an empty box. */
+  prefill: `Hi ${company.name}! I'd like a quote for epoxy flooring. Here are photos of my space:`,
+  /** Shown under the form as the alternative route. */
+  formAside: 'Prefer to send photos? Message us on WhatsApp and we can quote faster.',
 } as const;
 
 export const seo = {

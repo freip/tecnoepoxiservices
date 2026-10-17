@@ -1,0 +1,77 @@
+/* Floating WhatsApp entry point.
+   Sits out of the way until the hero scrolls past, so it never competes with
+   the hero's own CTA row — then stays reachable for the whole page. */
+
+.fab {
+  position: fixed;
+  right: clamp(1rem, 0.6rem + 1.4vw, 1.75rem);
+  bottom: clamp(1rem, 0.6rem + 1.4vw, 1.75rem);
+  z-index: 60;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #0b2a17;
+  text-decoration: none;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  -webkit-tap-highlight-color: transparent;
+
+  /* Hidden until shown, and non-interactive while hidden so it cannot be
+     tabbed to or tapped through. */
+  opacity: 0;
+  transform: translateY(14px) scale(0.94);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-mid) var(--ease),
+    transform var(--dur-mid) var(--ease),
+    box-shadow var(--dur-mid) var(--ease);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.fab:hover,
+.fab:focus-visible {
+  background: #1da851;
+  color: #fff;
+  box-shadow: 0 14px 38px rgba(37, 211, 102, 0.36);
+}
+
+.icon {
+  display: grid;
+  place-content: center;
+  flex: none;
+}
+
+/* Below the label breakpoint the bubble goes icon-only: a pill wide enough for
+   text would sit on top of the content on a small screen. */
+@media (max-width: 26rem) {
+  .label {
+    display: none;
+  }
+
+  .fab {
+    padding: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    transition: opacity var(--dur-fast) var(--ease);
+    transform: none;
+  }
+
+  .visible {
+    transform: none;
+  }
+}

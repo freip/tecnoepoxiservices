@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
-import { hero } from '@/content/site';
+import { hero, whatsapp } from '@/content/site';
+import { whatsappUrl } from '@/lib/whatsapp';
 import { CtaButton } from './ui/CtaButton';
 import styles from './Hero.module.css';
 
@@ -73,9 +74,15 @@ export function Hero() {
 
           <p className={styles.subhead}>{hero.subhead}</p>
 
+          {/* Two equal ways in — the form and WhatsApp — then the quiet third.
+              WhatsApp sits beside the primary rather than below the fold
+              because a large share of customers start there. */}
           <div className={styles.ctas}>
             <CtaButton href="#quote" size="lg">
               {hero.primaryCta}
+            </CtaButton>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+              {whatsapp.label}
             </CtaButton>
             <CtaButton href="#work" variant="ghost" size="lg">
               {hero.secondaryCta}

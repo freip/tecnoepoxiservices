@@ -55,8 +55,15 @@
   text-wrap: balance;
 }
 
-/* The button needs clear air from the copy — at 1.5rem it read as part of the
-   same paragraph block rather than as the section's one action. */
+/* The buttons need clear air from the copy — at 1.5rem they read as part of the
+   same paragraph block rather than as the section's action. */
 .content > :last-child {
   margin-top: clamp(0.75rem, 0.4rem + 1.2vw, 1.5rem);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }

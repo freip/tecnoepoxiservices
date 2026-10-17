@@ -11,6 +11,7 @@ import { Testimonials } from '@/components/Testimonials';
 import { FinalCTA } from '@/components/FinalCTA';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Footer } from '@/components/Footer';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 
 /**
  * Narrative order: impact → desire → proof → understanding → trust → quote.
@@ -35,6 +36,7 @@ export default function HomePage() {
         <QuoteForm />
       </main>
       <Footer />
+      <WhatsAppFab />
     </>
   );
 }

@@ -156,6 +156,41 @@
   transform: translateY(-2px);
 }
 
+/* ---- WhatsApp ----
+   The only element on the page that leaves the navy/blue palette, and
+   deliberately so: roughly half the customer base arrives through WhatsApp, and
+   they scan for the green before they read the label. Recolouring it to match
+   the brand would cost more recognition than the palette consistency buys. */
+
+.whatsapp {
+  --wa: #25d366;
+  --wa-deep: #1da851;
+
+  background: var(--wa);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0b2a17;
+  box-shadow: var(--shadow-md);
+}
+
+.whatsapp::before {
+  background: var(--wa-deep);
+}
+
+.whatsapp:hover:not(:disabled),
+.whatsapp:focus-visible:not(:disabled) {
+  color: var(--white);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+  transform: translateY(-2px);
+}
+
+/* The mark sits ahead of the label, so it needs the mirrored optical nudge. */
+.mark {
+  display: grid;
+  place-content: center;
+  flex: none;
+  margin-left: calc(var(--cta-track) * -0.5);
+}
+
 /* For the one light section, where navy-on-white is the strong pairing. */
 .light {
   background: var(--navy);
@@ -204,5 +239,10 @@
 
   .ghost:hover:not(:disabled) {
     background: rgba(var(--white-rgb), 0.14);
+  }
+
+  .whatsapp:hover:not(:disabled) {
+    background: var(--wa-deep);
+    color: var(--white);
   }
 }

@@ -102,6 +102,16 @@
   animation: fade-up 900ms var(--ease) both 760ms;
 }
 
+/* On a phone the three CTAs stack, and the gallery link is the one that can
+   go: it is reachable from the nav and from the section itself, while the two
+   above it are the only paths that turn a visitor into a lead. Dropping it
+   keeps the credentials strip within reach of the first scroll. */
+@media (max-width: 34rem) {
+  .ctas > :last-child {
+    display: none;
+  }
+}
+
 /* ---- Authority strip ---- */
 
 .credentials {
