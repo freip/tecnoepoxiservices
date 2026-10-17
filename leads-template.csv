@@ -1,3 +1,3 @@
-Data,Nome,Telefone,Email,Origem,Status
-17/10/2026,APAGUE ESTA LINHA,(508) 555-0100,jason@email.com,Site,Novo
-17/10/2026,APAGUE ESTA LINHA,(978) 555-0142,maria@email.com,WhatsApp,Fechado
+Data,Nome,Telefone,Email,Origem,Status,Cidade,Tipo,Tamanho,Fotos,Mensagem
+17/10/2026,APAGUE ESTA LINHA,(508) 555-0100,jason@email.com,Site,Novo,Dracut,Garage,500 - 1000 sq ft,3,"Garagem de 2 carros, piso com oleo"
+17/10/2026,APAGUE ESTA LINHA,(978) 555-0142,maria@email.com,WhatsApp,Fechado,Lowell,Residential,Under 500 sq ft,0,Porao

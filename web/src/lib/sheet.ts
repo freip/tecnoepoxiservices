@@ -1,4 +1,5 @@
 import type { Lead } from './email';
+import { PROJECT_TYPE_LABELS, SIZE_RANGE_LABELS } from './quote';
 
 /**
  * Appends a lead as a row in the Google Sheet.
@@ -26,6 +27,15 @@ export async function appendLeadToSheet(lead: Lead): Promise<void> {
       // Form submissions are always the site. WhatsApp conversations never
       // reach this endpoint, so those rows stay a manual entry.
       origem: 'Site',
+      cidade: lead.location,
+      // Labels, not the raw union values: the sheet is read by a person, so it
+      // gets "500 – 1,000 sq ft", never "500-1000".
+      tipo: PROJECT_TYPE_LABELS[lead.projectType],
+      tamanho: SIZE_RANGE_LABELS[lead.approximateSize],
+      // Only the count — the form cannot carry the files. A number above zero
+      // is the cue to ask for them on WhatsApp.
+      fotos: lead.photoCount,
+      mensagem: lead.message,
       secret: process.env.LEADS_SHEET_SECRET,
     }),
     // Apps Script answers through a redirect to googleusercontent.com, which
