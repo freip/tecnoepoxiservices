@@ -268,6 +268,37 @@
   text-transform: uppercase;
 }
 
+/* Play badge on a clip's card. Centred and always visible — the meta row fades
+   in on hover, which is too late to tell someone what they are about to open. */
+.play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-content: center;
+  width: 56px;
+  height: 56px;
+  /* The triangle's visual centre sits left of its box; nudge it back. */
+  padding-left: 3px;
+  border: 1px solid rgba(var(--white-rgb), 0.45);
+  border-radius: 50%;
+  background: rgba(3, 11, 24, 0.48);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 520ms var(--ease),
+    border-color 520ms var(--ease),
+    transform 520ms var(--ease);
+}
+
+.card:hover .play,
+.card:focus-visible .play {
+  border-color: rgba(var(--blue-metal-rgb), 0.8);
+  background: rgba(35, 74, 134, 0.72);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
 .metaIcon {
   display: inline-flex;
   padding: 0.5rem;

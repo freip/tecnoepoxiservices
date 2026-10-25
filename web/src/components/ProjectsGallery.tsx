@@ -301,7 +301,7 @@ export function ProjectsGallery() {
                   if (draggedRef.current) return;
                   setOpenIndex(realIndex);
                 }}
-                aria-label={`View larger: ${project.alt}`}
+                aria-label={`${project.video ? 'Play video' : 'View larger'}: ${project.alt}`}
               >
                 <Image
                   src={project.src}
@@ -315,6 +315,15 @@ export function ProjectsGallery() {
                   draggable={false}
                 />
                 <span className={styles.overlay} aria-hidden="true" />
+                {/* Shown without hover, unlike the meta row: it is the only cue
+                    that this card opens a clip rather than a photograph. */}
+                {project.video && (
+                  <span className={styles.play} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                      <path d="M8 5.5v13l11-6.5z" />
+                    </svg>
+                  </span>
+                )}
                 <span className={styles.meta} aria-hidden="true">
                   <span className={styles.metaCategory}>{project.category}</span>
                   <span className={styles.metaIcon}>

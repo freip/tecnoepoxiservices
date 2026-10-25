@@ -24,6 +24,15 @@ export interface ProjectImage {
   /** Intrinsic dimensions, used to reserve layout space and avoid distortion. */
   width: number;
   height: number;
+  /**
+   * Set when the item is a clip rather than a photograph. `src` is then the
+   * poster frame, and only the lightbox ever plays this file.
+   *
+   * The rail deliberately stays on the still: it renders every card twice to
+   * close the loop, so a clip there would mean two <video> elements drifting
+   * on screen and downloading before anyone has asked to watch.
+   */
+  video?: string;
 }
 
 export const company = {
@@ -227,6 +236,13 @@ export const projects: ProjectImage[] = [
     height: 1596,
   },
   {
+    src: '/assets/projects/garage_6.jpg',
+    alt: 'Three-bay garage with a grey flake epoxy floor and matching flake coving up the lower walls',
+    category: 'garage',
+    width: 1672,
+    height: 941,
+  },
+  {
     src: '/assets/projects/residential_2.jpg',
     alt: 'Living space with a pale pearl metallic epoxy floor',
     category: 'residential',
@@ -269,6 +285,14 @@ export const projects: ProjectImage[] = [
     height: 690,
   },
   {
+    src: '/assets/projects/garage-tour-poster.jpg',
+    alt: 'Walkthrough of a finished garage with a grey flake epoxy floor',
+    category: 'garage',
+    width: 720,
+    height: 1280,
+    video: '/assets/projects/garage-tour.mp4',
+  },
+  {
     src: '/assets/projects/commercial_5.jpg',
     alt: 'Sneaker retail floor finished in white and blue marbled epoxy',
     category: 'commercial',
@@ -295,6 +319,13 @@ export const projects: ProjectImage[] = [
     category: 'commercial',
     width: 960,
     height: 960,
+  },
+  {
+    src: '/assets/projects/garage_7.jpg',
+    alt: 'Three-bay garage seen from the driveway, finished with a grey flake epoxy floor',
+    category: 'garage',
+    width: 1672,
+    height: 941,
   },
   {
     src: '/assets/projects/commercial_8.jpg',

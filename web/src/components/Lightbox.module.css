@@ -40,6 +40,19 @@
   animation: rise 420ms var(--ease) both;
 }
 
+/* Matches .image, so a clip and a photograph occupy the same box. The vertical
+   clips are the reason max-height leads here — width follows from it. */
+.video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(76vh, 900px);
+  border-radius: var(--r-md);
+  background: var(--navy);
+  box-shadow: var(--shadow-xl);
+  animation: rise 420ms var(--ease) both;
+}
+
 .caption {
   display: flex;
   flex-wrap: wrap;
@@ -156,7 +169,8 @@
     right: 25%;
   }
 
-  .image {
+  .image,
+  .video {
     max-height: 62vh;
   }
 }

@@ -76,7 +76,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
 
       // Trap Tab within the dialog.
       const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+        'button:not([disabled]), [href], video[controls], [tabindex]:not([tabindex="-1"])'
       );
       if (!focusables || focusables.length === 0) return;
 
@@ -134,17 +134,35 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
 
       <figure className={styles.figure}>
         <div className={styles.imageWrap}>
-          <Image
-            key={current.src}
-            src={current.src}
-            alt={current.alt}
-            width={current.width}
-            height={current.height}
-            sizes="92vw"
-            quality={88}
-            className={styles.image}
-            priority
-          />
+          {current.video ? (
+            // Muted is what makes autoplay allowed at all — the controls are
+            // there for anyone who wants the sound back. The poster is the same
+            // still the rail showed, so the card and the clip share a first frame.
+            <video
+              key={current.video}
+              className={styles.video}
+              src={current.video}
+              poster={current.src}
+              aria-label={current.alt}
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          ) : (
+            <Image
+              key={current.src}
+              src={current.src}
+              alt={current.alt}
+              width={current.width}
+              height={current.height}
+              sizes="92vw"
+              quality={88}
+              className={styles.image}
+              priority
+            />
+          )}
         </div>
         <figcaption className={styles.caption}>
           <span className={styles.captionCategory}>{current.category}</span>
