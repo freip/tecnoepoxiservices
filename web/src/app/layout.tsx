@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Inter_Tight } from 'next/font/google';
+import { WhatsAppClickTracker } from '@/components/WhatsAppClickTracker';
 import { company, seo } from '@/content/site';
 import '@/styles/globals.css';
 
@@ -81,6 +82,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${body.variable} ${display.variable}`}>
       <body>
         {children}
+        {/* Renders nothing — it only listens for taps on WhatsApp links. Lives
+            in the layout so one listener covers every CTA on the site. */}
+        <WhatsAppClickTracker />
         <script
           type="application/ld+json"
           // Static, author-controlled object — no user input reaches this string.

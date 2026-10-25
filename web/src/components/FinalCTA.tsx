@@ -28,7 +28,7 @@ export function FinalCTA() {
             <CtaButton href="#quote" size="lg">
               {finalCta.cta}
             </CtaButton>
-            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external trackAs="final-cta">
               {whatsapp.label}
             </CtaButton>
           </div>

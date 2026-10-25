@@ -30,6 +30,7 @@ export function WhatsAppFab() {
       href={whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
+      data-wa-origin="fab"
       aria-label={whatsapp.label}
       // Mirrors `pointer-events: none` for assistive tech and keyboard users,
       // so the control is not reachable while it is invisible.

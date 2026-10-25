@@ -115,6 +115,7 @@ export function Header() {
             variant="whatsapp"
             size="lg"
             external
+            trackAs="header"
             className={styles.mobileCta}
           >
             {whatsapp.label}

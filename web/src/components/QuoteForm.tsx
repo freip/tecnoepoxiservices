@@ -96,7 +96,7 @@ export function QuoteForm() {
                 lets us quote without a site visit. This is the best moment to
                 ask: the customer is engaged and has nothing left to do. */}
             <p className={styles.successPrompt}>{whatsapp.formAside}</p>
-            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external trackAs="pos-envio">
               {whatsapp.label}
             </CtaButton>
             <a className={styles.successPhone} href={company.phoneHref}>
@@ -295,6 +295,7 @@ export function QuoteForm() {
                   href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-wa-origin="form-fotos"
                 >
                   Send them on WhatsApp
                 </a>{' '}
@@ -312,7 +313,7 @@ export function QuoteForm() {
               <CtaButton type="submit" size="lg" disabled={status === 'sending'}>
                 {status === 'sending' ? 'Sending…' : quoteForm.submit}
               </CtaButton>
-              <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+              <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external trackAs="form">
                 {whatsapp.label}
               </CtaButton>
               <p className={styles.privacy}>

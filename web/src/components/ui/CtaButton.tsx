@@ -14,6 +14,14 @@ interface CtaButtonProps {
   className?: string;
   /** Opens in a new tab. Used by the WhatsApp links so the page is not lost. */
   external?: boolean;
+  /**
+   * Names this button in the WhatsApp click log — `hero`, `header`, `form`…
+   *
+   * A plain string rather than an onClick handler on purpose: it crosses the
+   * server/client boundary, so server components can label their buttons
+   * without becoming client components. WhatsAppClickTracker reads it.
+   */
+  trackAs?: string;
 }
 
 const Arrow = () => (
@@ -46,6 +54,7 @@ export function CtaButton({
   disabled,
   className,
   external,
+  trackAs,
 }: CtaButtonProps) {
   const classes = [styles.cta, styles[variant], styles[size], className].filter(Boolean).join(' ');
 
@@ -79,6 +88,7 @@ export function CtaButton({
         className={classes}
         href={href}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...(trackAs ? { 'data-wa-origin': trackAs } : {})}
       >
         {inner}
       </a>

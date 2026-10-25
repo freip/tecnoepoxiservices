@@ -81,7 +81,7 @@ export function Hero() {
             <CtaButton href="#quote" size="lg">
               {hero.primaryCta}
             </CtaButton>
-            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external>
+            <CtaButton href={whatsappUrl()} variant="whatsapp" size="lg" external trackAs="hero">
               {whatsapp.label}
             </CtaButton>
             <CtaButton href="#work" variant="ghost" size="lg">
